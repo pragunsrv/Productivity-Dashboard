@@ -12,7 +12,68 @@ body {
     padding: 20px;
 }
 
+.dashboard-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.widget {
+    background-color: #ffffff; /* White background */
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%; /* Adjust the width based on your preference */
+    text-align: center; /* Center the text inside the widget */
+}
+
 h2 {
     color: #007bff; /* Blue heading color */
-    margin: 20px 0;
+    margin: 0;
+}
+
+#to-do-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+#new-task {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+#add-task-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#add-task-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.delete-task-button {
+    margin-left: 10px;
+    padding: 2px 5px;
+    background-color: #dc3545; /* Red button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.delete-task-button:hover {
+    background-color: #c82333; /* Darker red on hover */
 }
