@@ -13,7 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addTask(taskText) {
         const listItem = document.createElement('li');
-        listItem.textContent = taskText;
+
+        const taskContent = document.createElement('span');
+        taskContent.textContent = taskText;
+
+        const taskTime = document.createElement('span');
+        taskTime.className = 'task-time';
+        taskTime.textContent = `Added on: ${new Date().toLocaleString()}`;
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -22,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             listItem.remove();
         });
 
+        listItem.appendChild(taskContent);
+        listItem.appendChild(taskTime);
         listItem.appendChild(deleteButton);
         toDoList.appendChild(listItem);
     }

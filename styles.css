@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: #dcdcdc; /* Light grey background */
 }
 
 .dashboard-container {
@@ -19,8 +19,8 @@ body {
 }
 
 .widget {
-    background-color: #ffffff; /* White background */
-    border: 1px solid #e9ecef;
+    background-color: #f0f0f0; /* Light grey background */
+    border: 1px solid #b0b0b0; /* Grey border */
     border-radius: 10px;
     padding: 20px;
     margin: 15px;
@@ -30,7 +30,7 @@ body {
 }
 
 h2 {
-    color: #007bff; /* Blue heading color */
+    color: #505050; /* Dark grey heading color */
     margin: 0;
 }
 
@@ -40,18 +40,32 @@ h2 {
     text-align: left;
 }
 
+#to-do-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #b0b0b0; /* Grey border */
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#to-do-list li:hover {
+    background-color: #e0e0e0; /* Slightly darker grey */
+}
+
 #new-task {
     width: 80%;
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    border: 1px solid #ced4da;
+    border: 1px solid #b0b0b0; /* Grey border */
 }
 
 #add-task-button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff; /* Blue button color */
+    background-color: #808080; /* Grey button color */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -60,20 +74,33 @@ h2 {
 }
 
 #add-task-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #505050; /* Darker grey on hover */
 }
 
 .delete-task-button {
-    margin-left: 10px;
     padding: 2px 5px;
-    background-color: #dc3545; /* Red button color */
+    background-color: #a0a0a0; /* Light grey button color */
     color: #ffffff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#to-do-list li:hover .delete-task-button {
+    display: inline-block;
 }
 
 .delete-task-button:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #707070; /* Darker grey on hover */
+}
+
+.task-time {
+    font-size: 12px;
+    color: #888888; /* Medium grey text */
 }
