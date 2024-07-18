@@ -262,36 +262,132 @@ document.addEventListener('DOMContentLoaded', () => {
     newQuoteButton.addEventListener('click', displayQuote);
 
     moreQuotesButton.addEventListener('click', () => {
-        const newQuote = prompt('Enter a new quote:');
-        if (newQuote) {
-            quotes.push(newQuote);
-            alert('New quote added successfully!');
-        } else {
-            alert('No quote added.');
+        const newQuotes = [
+            "Quote 11: Success is not final, failure is not fatal: It is the courage to continue that counts.",
+            "Quote 12: Life isn't about finding yourself. Life is about creating yourself.",
+            "Quote 13: Challenges are what make life interesting and overcoming them is what makes life meaningful.",
+            "Quote 14: The only way to do great work is to love what you do.",
+            "Quote 15: The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart."
+        ];
+
+        quotes.push(...newQuotes);
+        moreQuotesButton.disabled = true;
+    });
+
+    displayQuote();
+
+    // Image Gallery functionality
+    const imageGallery = document.getElementById('image-gallery');
+    const uploadInput = document.getElementById('upload-input');
+    const uploadButton = document.getElementById('upload-button');
+
+    uploadButton.addEventListener('click', () => {
+        const files = uploadInput.files;
+        if (files.length === 0) {
+            alert('Please select a file to upload.');
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                img.alt = file.name;
+                imageGallery.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
         }
     });
-    // Image Gallery functionality
-    const imageUpload = document.getElementById('image-upload');
-    const imageDisplay = document.getElementById('image-display');
 
-    imageUpload.addEventListener('change', (event) => {
-        const files = event.target.files;
-        imageDisplay.innerHTML = ''; // Clear previous images
+    // Tic Tac Toe functionality
+    const ticTacToeBoard = document.getElementById('tic-tac-toe-board');
+    const restartButton = document.getElementById('restart-button');
+    const gameStatus = document.getElementById('game-status');
 
-        Array.from(files).forEach(file => {
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    imageDisplay.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            }
+    const X_CLASS = 'x';
+    const O_CLASS = 'o';
+    let currentPlayerClass = X_CLASS;
+    let gameActive = true;
+
+    const cellElements = document.querySelectorAll('[data-cell]');
+
+    cellElements.forEach(cell => {
+        cell.addEventListener('click', handleClick, { once: true });
+    });
+
+    restartButton.addEventListener('click', startGame);
+
+    function startGame() {
+        cellElements.forEach(cell => {
+            cell.classList.remove(X_CLASS);
+            cell.classList.remove(O_CLASS);
+            cell.removeEventListener('click', handleClick);
+            cell.addEventListener('click', handleClick, { once: true });
         });
-});
+        gameStatus.textContent = '';
+        gameActive = true;
+        currentPlayerClass = X_CLASS;
+    }
 
+    function handleClick(event) {
+        const cell = event.target;
+        if (!gameActive || cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS)) {
+            return;
+        }
+        
+        placeMark(cell, currentPlayerClass);
+        if (checkWin(currentPlayerClass)) {
+            endGame(false);
+        } else if (isDraw()) {
+            endGame(true);
+        } else {
+            swapTurns();
+        }
+    }
 
-    // Initial display of a random quote
-    displayQuote();
+    function placeMark(cell, mark) {
+        cell.classList.add(mark);
+    }
+
+    function swapTurns() {
+        currentPlayerClass = currentPlayerClass === X_CLASS ? O_CLASS : X_CLASS;
+    }
+
+    function checkWin(mark) {
+        const WINNING_COMBINATIONS = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        return WINNING_COMBINATIONS.some(combination => {
+            return combination.every(index => {
+                return cellElements[index].classList.contains(mark);
+            });
+        });
+    }
+
+    function isDraw() {
+        return [...cellElements].every(cell => {
+            return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
+        });
+    }
+
+    function endGame(draw) {
+        if (draw) {
+            gameStatus.textContent = 'Draw!';
+        } else {
+            gameStatus.textContent = `${currentPlayerClass === X_CLASS ? "X" : "O"} wins!`;
+        }
+        gameActive = false;
+    }
 });

@@ -1,107 +1,317 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #d3d3d3; /* Greyish rock background */
 }
 
-.dashboard-container {
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-}
-
-.widget {
-    background-color: #808080; /* Greyish rock background */
-    border: 1px solid #a9a9a9;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 22%;
-    transition: transform 0.3s ease-in-out;
-}
-
-.widget:hover {
-    transform: scale(1.05);
-}
-
-h2 {
-    color: #2f4f4f; /* Dark slate grey */
-}
-
-button {
-    margin-top: 10px;
+    background-color: #333;
+    color: #fff;
     padding: 10px 20px;
-    background-color: #696969; /* Dim grey button color */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 20px;
 }
 
-button:hover {
-    background-color: #505050; /* Darker dim grey on hover */
+header h1 {
+    font-size: 1.8rem;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+.dashboard-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container {
+    margin-bottom: 20px;
+}
+
+.todo-container input[type="text"] {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.todo-container button {
+    padding: 8px 12px;
+    margin-left: 10px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.todo-container button:hover {
+    background-color: #555;
+}
+
+#to-do-list {
+    list-style-type: none;
+    margin-top: 10px;
 }
 
 #to-do-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
-    padding: 5px;
-    border-bottom: 1px solid #a9a9a9;
-    transition: background-color 0.3s ease-in-out;
-}
-
-#to-do-list li:hover {
-    background-color: #dcdcdc; /* Gainsboro background on hover */
-}
-
-.task-time {
-    font-size: 0.8em;
-    color: #2f4f4f; /* Dark slate grey */
-    margin-left: 10px;
+    align-items: center;
 }
 
 .delete-task-button {
-    display: none;
-    background-color: #b22222; /* Firebrick red */
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-#to-do-list li:hover .delete-task-button {
-    display: inline;
+.delete-task-button:hover {
+    background-color: #d32f2f;
 }
 
-#calc-buttons-scientific {
-    display: none;
+#weather-widget {
+    padding: 20px;
+    text-align: center;
+}
+
+#weather-widget p {
+    font-size: 1.2rem;
+}
+
+.converter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.converter-container input[type="number"],
+.converter-container select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.converter-container button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.converter-container button:hover {
+    background-color: #555;
+}
+
+#conversion-result {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.calculator-container {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#calc-display {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
 }
 
 .calc-buttons-basic,
 .calc-buttons-scientific {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    grid-gap: 5px;
+    margin-bottom: 10px;
 }
 
 .calc-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    background-color: #696969; /* Dim grey button color */
-    color: #ffffff;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: #4caf50;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease;
 }
 
 .calc-button:hover {
-    background-color: #505050; /* Darker dim grey on hover */
+    background-color: #45a049;
 }
-#image-display img {
-    max-width: 100%;
-    max-height: 200px;
+
+.calc-toggle-buttons {
     margin-top: 10px;
+}
+
+.calc-toggle-buttons button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+.calc-toggle-buttons button:hover {
+    background-color: #555;
+}
+
+.quote-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#quote-display {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+#new-quote-button,
+#more-quotes-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     margin-right: 10px;
 }
 
+#new-quote-button:hover,
+#more-quotes-button:hover {
+    background-color: #555;
+}
+
+.gallery-container {
+    text-align: center;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.image-gallery img {
+    max-width: 200px;
+    height: auto;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.tic-tac-toe-container {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    margin-bottom: 10px;
+}
+
+.cell {
+    background-color: #ddd;
+    padding: 50px 0;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cell:hover {
+    background-color: #ccc;
+}
+
+#restart-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+#restart-button:hover {
+    background-color: #555;
+}
+
+#game-status {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-section {
+        padding: 15px;
+    }
+    .calc-buttons-basic,
+    .calc-buttons-scientific {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
