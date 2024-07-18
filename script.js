@@ -42,7 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const lon = position.coords.longitude;
 
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Weather data not available');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     const { name } = data;
                     const { temp } = data.main;
@@ -72,7 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://api.exchangerate-api.com/v4/latest/USD';
 
     fetch(apiUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Exchange rates not available');
+            }
+            return response.json();
+        })
         .then(data => {
             const currencies = Object.keys(data.rates);
             populateCurrencySelect(fromCurrencySelect, currencies);
@@ -80,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error fetching exchange rates:', error);
+            conversionResult.textContent = 'Error fetching exchange rates. Please try again later.';
+            convertButton.disabled = true;
         });
 
     function populateCurrencySelect(selectElement, currencies) {
@@ -102,15 +114,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Conversion rate not available');
+                }
+                return response.json();
+            })
             .then(data => {
                 const rate = data.rates[toCurrency];
+                if (!rate) {
+                    throw new Error(`Rate for ${toCurrency} not found`);
+                }
                 const convertedAmount = (amount * rate).toFixed(2);
                 conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
             })
             .catch(error => {
                 console.error('Error converting currency:', error);
-                conversionResult.textContent = 'Error converting currency.';
+                conversionResult.textContent = 'Error converting currency. Please check your inputs and try again.';
             });
     });
 
@@ -242,12 +262,12 @@ document.addEventListener('DOMContentLoaded', () => {
     newQuoteButton.addEventListener('click', displayQuote);
 
     moreQuotesButton.addEventListener('click', () => {
-        const numQuotesToAdd = 5; // Number of additional quotes to add
-        for (let i = 0; i < numQuotesToAdd; i++) {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const quote = document.createElement('div');
-            quote.textContent = quotes[randomIndex];
-            quoteDisplay.appendChild(quote);
+        const newQuote = prompt('Enter a new quote:');
+        if (newQuote) {
+            quotes.push(newQuote);
+            alert('New quote added successfully!');
+        } else {
+            alert('No quote added.');
         }
     });
 
