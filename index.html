@@ -3,109 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Dashboard</title>
 </head>
 <body>
     <div class="dashboard-container">
-        <h1>Dashboard</h1>
-        <div class="dashboard-row">
-            <div class="widget">
-                <h2>To-Do List</h2>
-                <input type="text" id="new-task" placeholder="Add a new task">
-                <button id="add-task-button">Add Task</button>
-                <ul id="to-do-list"></ul>
-            </div>
-            <div class="widget">
-                <h2>Random Quotes</h2>
+        <!-- To-Do List -->
+        <div class="widget" id="to-do-widget">
+            <h2>To-Do List</h2>
+            <input type="text" id="new-task" placeholder="New Task">
+            <button id="add-task-button">Add Task</button>
+            <ul id="to-do-list"></ul>
+        </div>
+
+        <!-- Weather Widget -->
+        <div class="widget" id="weather-widget">
+            <h2>Weather</h2>
+            <div id="weather-info">
+                <div id="location"></div>
+                <div id="temperature"></div>
+                <div id="description"></div>
+                <div id="icon"></div>
             </div>
         </div>
-        <div class="dashboard-row">
-            <div class="widget">
-                <h2>Calculator</h2>
-                <div id="calculator">
-                    <input type="text" id="calc-display" disabled>
-                    <div id="calc-buttons">
-                        <button class="calc-button" data-value="7">7</button>
-                        <button class="calc-button" data-value="8">8</button>
-                        <button class="calc-button" data-value="9">9</button>
-                        <button class="calc-button" data-value="/">/</button>
-                        <button class="calc-button" data-value="4">4</button>
-                        <button class="calc-button" data-value="5">5</button>
-                        <button class="calc-button" data-value="6">6</button>
-                        <button class="calc-button" data-value="*">*</button>
-                        <button class="calc-button" data-value="1">1</button>
-                        <button class="calc-button" data-value="2">2</button>
-                        <button class="calc-button" data-value="3">3</button>
-                        <button class="calc-button" data-value="-">-</button>
-                        <button class="calc-button" data-value="0">0</button>
-                        <button class="calc-button" data-value=".">.</button>
-                        <button class="calc-button" data-value="=">=</button>
-                        <button class="calc-button" data-value="+">+</button>
-                        <button class="calc-button" data-value="C">C</button>
-                    </div>
-                </div>
-            </div>
-            <div class="widget" id="weather-widget">
-                <h2>Weather</h2>
-                <div id="weather-info">
-                    <div id="location"></div>
-                    <div id="temperature"></div>
-                    <div id="description"></div>
-                    <div id="icon"></div>
-                </div>
-            </div>
+
+        <!-- Currency Converter -->
+        <div class="widget" id="currency-widget">
+            <h2>Currency Converter</h2>
+            <input type="number" id="amount" placeholder="Amount">
+            <select id="from-currency"></select>
+            <select id="to-currency"></select>
+            <button id="convert-button">Convert</button>
+            <div id="conversion-result"></div>
         </div>
-        <div class="dashboard-row">
-            <div class="widget">
-                <h2>Image Gallery</h2>
+
+        <!-- Calculator -->
+        <div class="widget" id="calculator-widget">
+            <h2>Calculator</h2>
+            <input type="text" id="calc-display" disabled>
+            <div id="calc-buttons" class="calc-buttons-basic">
+                <!-- Basic Calculator Buttons -->
+                <button class="calc-button" data-value="7">7</button>
+                <button class="calc-button" data-value="8">8</button>
+                <button class="calc-button" data-value="9">9</button>
+                <button class="calc-button" data-value="/">/</button>
+                <button class="calc-button" data-value="4">4</button>
+                <button class="calc-button" data-value="5">5</button>
+                <button class="calc-button" data-value="6">6</button>
+                <button class="calc-button" data-value="*">*</button>
+                <button class="calc-button" data-value="1">1</button>
+                <button class="calc-button" data-value="2">2</button>
+                <button class="calc-button" data-value="3">3</button>
+                <button class="calc-button" data-value="-">-</button>
+                <button class="calc-button" data-value="0">0</button>
+                <button class="calc-button" data-value=".">.</button>
+                <button class="calc-button" data-value="=">=</button>
+                <button class="calc-button" data-value="+">+</button>
+                <button class="calc-button" data-value="C">C</button>
+                <button class="calc-button" data-value="←">←</button>
+                <button class="calc-button" data-value="%">%</button>
+                <button id="toggle-scientific">Scientific</button>
             </div>
-            <div class="widget">
-                <h2>Feedback Form</h2>
-            </div>
-        </div>
-        <div class="dashboard-row">
-            <div class="widget" id="currency-widget">
-                <h2>Currency Converter</h2>
-                <input type="number" id="amount" placeholder="Amount">
-                <select id="from-currency"></select>
-                <select id="to-currency"></select>
-                <button id="convert-button">Convert</button>
-                <div id="conversion-result"></div>
-            </div>
-            <div class="widget">
-                <h2>News</h2>
+            <div id="calc-buttons-scientific" class="calc-buttons-scientific">
+                <!-- Scientific Calculator Buttons -->
+                <button class="calc-button" data-value="sin">sin</button>
+                <button class="calc-button" data-value="cos">cos</button>
+                <button class="calc-button" data-value="tan">tan</button>
+                <button class="calc-button" data-value="log">log</button>
+                <button class="calc-button" data-value="sqrt">√</button>
+                <button class="calc-button" data-value="pow">^</button>
+                <button class="calc-button" data-value="pi">π</button>
+                <button class="calc-button" data-value="e">e</button>
+                <button id="toggle-basic">Basic</button>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
-<!-- Calculator widget -->
-<div class="widget">
-    <h2>Calculator</h2>
-    <div id="calculator">
-        <input type="text" id="calc-display" disabled>
-        <div id="calc-buttons">
-            <button class="calc-button" data-value="7">7</button>
-            <button class="calc-button" data-value="8">8</button>
-            <button class="calc-button" data-value="9">9</button>
-            <button class="calc-button" data-value="/">/</button>
-            <button class="calc-button" data-value="4">4</button>
-            <button class="calc-button" data-value="5">5</button>
-            <button class="calc-button" data-value="6">6</button>
-            <button class="calc-button" data-value="*">*</button>
-            <button class="calc-button" data-value="1">1</button>
-            <button class="calc-button" data-value="2">2</button>
-            <button class="calc-button" data-value="3">3</button>
-            <button class="calc-button" data-value="-">-</button>
-            <button class="calc-button" data-value="0">0</button>
-            <button class="calc-button" data-value=".">.</button>
-            <button class="calc-button" data-value="=">=</button>
-            <button class="calc-button" data-value="+">+</button>
-            <button class="calc-button" data-value="C">C</button>
-            <button class="calc-button" data-value="←">←</button>
-            <button class="calc-button" data-value="%">%</button>
-        </div>
-    </div>
-</div>

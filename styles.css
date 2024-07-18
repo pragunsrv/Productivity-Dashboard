@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #dcdcdc; /* Light grey background */
+    background-color: #d3d3d3; /* Greyish rock background */
 }
 
 .dashboard-container {
@@ -12,188 +12,82 @@ body {
     padding: 20px;
 }
 
-.dashboard-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
 .widget {
-    background-color: #f0f0f0; /* Light grey background */
-    border: 1px solid #b0b0b0; /* Grey border */
+    background-color: #808080; /* Greyish rock background */
+    border: 1px solid #a9a9a9;
     border-radius: 10px;
     padding: 20px;
     margin: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%; /* Adjust the width based on your preference */
-    text-align: center; /* Center the text inside the widget */
+    width: 22%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.widget:hover {
+    transform: scale(1.05);
 }
 
 h2 {
-    color: #505050; /* Dark grey heading color */
-    margin: 0;
+    color: #2f4f4f; /* Dark slate grey */
 }
 
-#to-do-list {
-    list-style-type: none;
-    padding: 0;
-    text-align: left;
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #696969; /* Dim grey button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #505050; /* Darker dim grey on hover */
 }
 
 #to-do-list li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #b0b0b0; /* Grey border */
-    position: relative;
+    padding: 5px;
+    border-bottom: 1px solid #a9a9a9;
     transition: background-color 0.3s ease-in-out;
 }
 
 #to-do-list li:hover {
-    background-color: #e0e0e0; /* Slightly darker grey */
-}
-
-#new-task {
-    width: 80%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #b0b0b0; /* Grey border */
-}
-
-#add-task-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #808080; /* Grey button color */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-#add-task-button:hover {
-    background-color: #505050; /* Darker grey on hover */
-}
-
-.delete-task-button {
-    padding: 2px 5px;
-    background-color: #a0a0a0; /* Light grey button color */
-    color: #ffffff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    display: none;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-#to-do-list li:hover .delete-task-button {
-    display: inline-block;
-}
-
-.delete-task-button:hover {
-    background-color: #707070; /* Darker grey on hover */
+    background-color: #dcdcdc; /* Gainsboro background on hover */
 }
 
 .task-time {
-    font-size: 12px;
-    color: #888888; /* Medium grey text */
+    font-size: 0.8em;
+    color: #2f4f4f; /* Dark slate grey */
+    margin-left: 10px;
 }
 
-/* Weather widget styling */
-#weather-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.delete-task-button {
+    display: none;
+    background-color: #b22222; /* Firebrick red */
 }
 
-#location {
-    font-size: 18px;
-    font-weight: bold;
+#to-do-list li:hover .delete-task-button {
+    display: inline;
 }
 
-#temperature {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 5px 0;
+#calc-buttons-scientific {
+    display: none;
 }
 
-#description {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-#icon {
-    width: 50px;
-    height: 50px;
-    background-size: cover;
-    margin-bottom: 10px;
-}
-
-/* Currency converter widget styling */
-#currency-widget input,
-#currency-widget select {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #b0b0b0; /* Grey border */
-}
-
-#currency-widget button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #808080; /* Grey button color */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-#currency-widget button:hover {
-    background-color: #505050; /* Darker grey on hover */
-}
-
-#conversion-result {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #505050; /* Dark grey text */
-}
-
-/* Calculator widget styling */
-#calculator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#calc-display {
-    width: 80%;
-    padding: 10px;
-    font-size: 24px;
-    text-align: right;
-    margin-bottom: 10px;
-    border: 1px solid #b0b0b0; /* Grey border */
-    border-radius: 5px;
-}
-
-#calc-buttons {
+.calc-buttons-basic,
+.calc-buttons-scientific {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    width: 80%;
 }
 
 .calc-button {
-    padding: 20px;
-    font-size: 18px;
-    background-color: #808080; /* Grey button color */
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #696969; /* Dim grey button color */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -202,5 +96,5 @@ h2 {
 }
 
 .calc-button:hover {
-    background-color: #505050; /* Darker grey on hover */
+    background-color: #505050; /* Darker dim grey on hover */
 }

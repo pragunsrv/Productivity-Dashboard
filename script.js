@@ -116,17 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculator functionality
     const calcDisplay = document.getElementById('calc-display');
-    const calcButtons = document.querySelectorAll('.calc-button');
+    const calcButtonsBasic = document.querySelectorAll('.calc-buttons-basic .calc-button');
+    const calcButtonsScientific = document.querySelectorAll('.calc-buttons-scientific .calc-button');
+    const toggleScientificButton = document.getElementById('toggle-scientific');
+    const toggleBasicButton = document.getElementById('toggle-basic');
 
     let calcInput = '';
 
-    calcButtons.forEach(button => {
+    calcButtonsBasic.forEach(button => {
         button.addEventListener('click', () => {
             const value = button.getAttribute('data-value');
 
             if (value === '=') {
                 try {
-                    calcInput = eval(calcInput).toString();
+                    calcInput = calculateExpression(calcInput);
                 } catch {
                     calcInput = 'Error';
                 }
@@ -142,19 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Adding percentage functionality
-    function calculatePercentage(expression) {
-        return expression.replace(/(\d+(\.\d+)?)%/g, (match, p1) => (parseFloat(p1) / 100).toString());
-    }
-
-    calcButtons.forEach(button => {
+    calcButtonsScientific.forEach(button => {
         button.addEventListener('click', () => {
             const value = button.getAttribute('data-value');
 
             if (value === '=') {
                 try {
-                    calcInput = calculatePercentage(calcInput);
-                    calcInput = eval(calcInput).toString();
+                    calcInput = calculateExpression(calcInput);
                 } catch {
                     calcInput = 'Error';
                 }
@@ -162,11 +159,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 calcInput = '';
             } else if (value === '←') {
                 calcInput = calcInput.slice(0, -1);
+            } else if (value === 'sin' || value === 'cos' || value === 'tan' || value === 'log' || value === 'sqrt') {
+                calcInput = `${value}(${calcInput})`;
+            } else if (value === 'pow') {
+                calcInput += '**';
+            } else if (value === 'pi') {
+                calcInput += Math.PI;
+            } else if (value === 'e') {
+                calcInput += Math.E;
             } else {
                 calcInput += value;
             }
 
             calcDisplay.value = calcInput;
         });
+    });
+
+    function calculateExpression(expression) {
+        return Function('return ' + expression.replace(/(\d+(\.\d+)?)%/g, (match, p1) => (parseFloat(p1) / 100).toString()))();
+    }
+
+    toggleScientificButton.addEventListener('click', () => {
+        document.getElementById('calc-buttons').style.display = 'none';
+        document.getElementById('calc-buttons-scientific').style.display = 'grid';
+    });
+
+    toggleBasicButton.addEventListener('click', () => {
+        document.getElementById('calc-buttons').style.display = 'grid';
+        document.getElementById('calc-buttons-scientific').style.display = 'none';
+    });
+
+    // Handle keyboard input for the calculator
+    document.addEventListener('keydown', (event) => {
+        const key = event.key;
+
+        if (!isNaN(key) || key === '.') {
+            calcInput += key;
+        } else if (key === 'Enter') {
+            try {
+                calcInput = calculateExpression(calcInput);
+            } catch {
+                calcInput = 'Error';
+            }
+        } else if (key === 'Backspace') {
+            calcInput = calcInput.slice(0, -1);
+        } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '%') {
+            calcInput += key;
+        } else if (key === 'Escape') {
+            calcInput = '';
+        }
+
+        calcDisplay.value = calcInput;
     });
 });
