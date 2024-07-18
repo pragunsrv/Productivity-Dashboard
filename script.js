@@ -228,9 +228,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const quoteDisplay = document.getElementById('quote-display');
     const newQuoteButton = document.getElementById('new-quote-button');
+    const moreQuotesButton = document.getElementById('more-quotes-button');
 
-    newQuoteButton.addEventListener('click', () => {
+    function getRandomQuote() {
         const randomIndex = Math.floor(Math.random() * quotes.length);
-        quoteDisplay.textContent = quotes[randomIndex];
+        return quotes[randomIndex];
+    }
+
+    function displayQuote() {
+        quoteDisplay.textContent = getRandomQuote();
+    }
+
+    newQuoteButton.addEventListener('click', displayQuote);
+
+    moreQuotesButton.addEventListener('click', () => {
+        const numQuotesToAdd = 5; // Number of additional quotes to add
+        for (let i = 0; i < numQuotesToAdd; i++) {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = document.createElement('div');
+            quote.textContent = quotes[randomIndex];
+            quoteDisplay.appendChild(quote);
+        }
     });
+
+    // Initial display of a random quote
+    displayQuote();
 });
