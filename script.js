@@ -132,6 +132,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (value === 'C') {
                 calcInput = '';
+            } else if (value === '←') {
+                calcInput = calcInput.slice(0, -1);
+            } else {
+                calcInput += value;
+            }
+
+            calcDisplay.value = calcInput;
+        });
+    });
+
+    // Adding percentage functionality
+    function calculatePercentage(expression) {
+        return expression.replace(/(\d+(\.\d+)?)%/g, (match, p1) => (parseFloat(p1) / 100).toString());
+    }
+
+    calcButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.getAttribute('data-value');
+
+            if (value === '=') {
+                try {
+                    calcInput = calculatePercentage(calcInput);
+                    calcInput = eval(calcInput).toString();
+                } catch {
+                    calcInput = 'Error';
+                }
+            } else if (value === 'C') {
+                calcInput = '';
+            } else if (value === '←') {
+                calcInput = calcInput.slice(0, -1);
             } else {
                 calcInput += value;
             }
