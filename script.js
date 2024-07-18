@@ -391,3 +391,24 @@ document.addEventListener('DOMContentLoaded', () => {
         gameActive = false;
     }
 });
+// JavaScript for handling feedback form submission
+const feedbackForm = document.getElementById('feedback-form');
+const feedbackStatus = document.getElementById('feedback-status');
+
+feedbackForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Collect form data
+    const formData = new FormData(feedbackForm);
+    const feedbackData = {};
+    formData.forEach((value, key) => {
+        feedbackData[key] = value;
+    });
+
+    // Simulate submission (replace with actual submission logic)
+    setTimeout(() => {
+        feedbackStatus.textContent = 'Feedback submitted successfully!';
+        feedbackForm.reset();
+    }, 1000);
+});
+

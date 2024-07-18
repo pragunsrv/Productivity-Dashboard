@@ -315,3 +315,48 @@ nav ul li a:hover {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+#feedback-form {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#feedback-form input[type="text"],
+#feedback-form input[type="email"],
+#feedback-form textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#feedback-form textarea {
+    resize: vertical;
+}
+
+#submit-feedback {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-feedback:hover {
+    background-color: #555;
+}
+
+#feedback-status {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}

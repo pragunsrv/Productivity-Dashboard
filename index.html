@@ -130,3 +130,19 @@
     <script src="script.js"></script>
 </body>
 </html>
+<section id="feedback" class="dashboard-section">
+    <h2>Feedback Form</h2>
+    <form id="feedback-form">
+        <label for="feedback-name">Name:</label>
+        <input type="text" id="feedback-name" name="name" required>
+        <br><br>
+        <label for="feedback-email">Email:</label>
+        <input type="email" id="feedback-email" name="email" required>
+        <br><br>
+        <label for="feedback-message">Message:</label><br>
+        <textarea id="feedback-message" name="message" rows="4" required></textarea>
+        <br><br>
+        <button type="submit" id="submit-feedback">Submit Feedback</button>
+    </form>
+    <p id="feedback-status"></p>
+</section>
