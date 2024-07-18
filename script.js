@@ -275,18 +275,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const imageDisplay = document.getElementById('image-display');
 
     imageUpload.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                imageDisplay.innerHTML = '';
-               imageDisplay.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+        const files = event.target.files;
+        imageDisplay.innerHTML = ''; // Clear previous images
+
+        Array.from(files).forEach(file => {
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    imageDisplay.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+});
 
 
     // Initial display of a random quote
