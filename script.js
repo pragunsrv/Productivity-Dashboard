@@ -211,4 +211,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         calcDisplay.value = calcInput;
     });
+
+    // Random Quotes generator functionality
+    const quotes = [
+        "Quote 1: The only limit to our realization of tomorrow is our doubts of today.",
+        "Quote 2: The future belongs to those who believe in the beauty of their dreams.",
+        "Quote 3: Do not watch the clock. Do what it does. Keep going.",
+        "Quote 4: Keep your face always toward the sunshine—and shadows will fall behind you.",
+        "Quote 5: The best way to predict the future is to create it.",
+        "Quote 6: You are never too old to set another goal or to dream a new dream.",
+        "Quote 7: Life is 10% what happens to us and 90% how we react to it.",
+        "Quote 8: The secret of getting ahead is getting started.",
+        "Quote 9: It always seems impossible until it’s done.",
+        "Quote 10: The best time to plant a tree was 20 years ago. The second best time is now."
+    ];
+
+    const quoteDisplay = document.getElementById('quote-display');
+    const newQuoteButton = document.getElementById('new-quote-button');
+
+    newQuoteButton.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteDisplay.textContent = quotes[randomIndex];
+    });
 });
